@@ -1,0 +1,254 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*{box-sizing:border-box}html,body{margin:0}</style></head><body><title>בעבותות אהבה – תסריטים לאישור</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* Layout: one reading column. A sticky tally bar on top, a usage notice, then one sheet per script version (call-sheet rows), each closed by its own decision strip. */
+:root{
+  --bg:#faf5f7; --surface:#ffffff; --ink:#3a1530; --muted:#7a5a6e; --line:#ecdbe4;
+  --accent:#a8326e; --rose:#e98bb6; --rose-ink:#9a2e64; --violet:#6d3f8f; --violet-soft:#efe6f6;
+  --green-ink:#2f7a4e; --green-soft:#e4f4ea; --amber:#a86a12; --amber-soft:#fbf0d9; --coral:#c8452f; --coral-soft:#fde5df; --chip:#f4e9ef;
+  --display:"Karantina","Assistant","Arial Hebrew",sans-serif;
+  --body:"Assistant","Heebo","Arial Hebrew",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#1e1019; --surface:#2a1724; --ink:#f6e8f0; --muted:#c4a6b8; --line:#47293d;
+  --accent:#f08cbd; --rose:#f08cbd; --rose-ink:#f6a5cb; --violet:#c9a3ea; --violet-soft:#3a2550;
+  --green-ink:#94d8ae; --green-soft:#1b3a28; --amber:#f0c36a; --amber-soft:#3f3316; --coral:#ff8a76; --coral-soft:#4a2620; --chip:#3a2232; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#1e1019; --surface:#2a1724; --ink:#f6e8f0; --muted:#c4a6b8; --line:#47293d;
+  --accent:#f08cbd; --rose:#f08cbd; --rose-ink:#f6a5cb; --violet:#c9a3ea; --violet-soft:#3a2550;
+  --green-ink:#94d8ae; --green-soft:#1b3a28; --amber:#f0c36a; --amber-soft:#3f3316; --coral:#ff8a76; --coral-soft:#4a2620; --chip:#3a2232; color-scheme:dark }
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:860px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,8vw,64px);line-height:.95;margin:0;color:var(--accent);text-wrap:balance}
+.sub{color:var(--muted);margin:6px 0 0;max-width:65ch}
+.notice{border:1.5px solid var(--accent);border-radius:6px;padding:12px 16px;background:var(--surface)}
+.notice .lbl{color:var(--accent)}
+.notice p{margin:0;max-width:70ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
+.tally{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.fbtn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.fbtn b{font-variant-numeric:tabular-nums}
+.sync{font-size:13px;color:var(--muted)}
+.sync.bad{color:var(--coral);font-weight:600}
+h2.sec{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;margin:14px 0 0;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.head{display:flex;gap:14px;align-items:flex-start;padding:16px 18px 12px;cursor:pointer;background:none;border:0;width:100%;text-align:start;font:inherit;color:inherit}
+.num{font-family:var(--display);font-size:46px;line-height:.8;color:var(--rose-ink);min-width:1.1em}
+.ht{flex:1;min-width:0}
+.kind{font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--muted)}
+.title{font-family:var(--display);font-size:34px;line-height:1;margin:2px 0 0}
+.pill{font-size:13px;font-weight:700;border-radius:999px;padding:4px 11px;white-space:nowrap;align-self:center}
+.pill.pending{background:var(--chip);color:var(--muted)}
+.pill.approved{background:var(--green-soft);color:var(--green-ink)}
+.pill.fix{background:var(--amber-soft);color:var(--amber)}
+.pill.rejected{background:var(--coral-soft);color:var(--coral)}
+.body{padding:0 18px 16px;display:flex;flex-direction:column;gap:14px}
+.card.closed .body{display:none}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--chip);border-radius:4px;padding:3px 9px;font-size:14px}
+.meta b{color:var(--muted);font-weight:600}
+.p{margin:0;max-width:65ch}
+.lbl{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;margin:0 0 4px}
+.beats{border-top:1px solid var(--line)}
+.beat{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.time{font-family:var(--display);font-size:24px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
+.bd{display:flex;flex-direction:column;gap:5px;min-width:0}
+.see{margin:0}
+.tag{align-self:flex-start;font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px}
+.tag.pod{background:var(--violet-soft);color:var(--violet)}
+.tag.vo{background:var(--chip);color:var(--rose-ink)}
+.say{margin:0;font-weight:700;border-inline-start:3px solid var(--rose);padding-inline-start:10px}
+.say.pod{border-color:var(--violet)}
+.scr{margin:0;font-size:14px;color:var(--muted)}
+ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px}
+.verify{background:var(--amber-soft);border-radius:4px;padding:10px 14px}
+.verify .lbl{color:var(--amber)}
+.rows{padding:0}
+.rows li{list-style:none;padding:6px 0;border-bottom:1px solid var(--line)}
+.decide{border-top:1px solid var(--line);background:var(--bg);padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.dbtn{font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:9px 16px;cursor:pointer;min-height:44px}
+.dbtn:focus-visible,.fbtn:focus-visible,.head:focus-visible,textarea:focus-visible,.copy:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.dbtn.approved[aria-pressed="true"]{background:var(--green-soft);border-color:var(--green-ink);color:var(--green-ink)}
+.dbtn.fix[aria-pressed="true"]{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+.dbtn.rejected[aria-pressed="true"]{background:var(--coral-soft);border-color:var(--coral);color:var(--coral)}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:74px;border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--surface);color:var(--ink);resize:vertical}
+.saved{font-size:13px;color:var(--muted);min-height:1.3em}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.summary pre{margin:0;white-space:pre-wrap;font-family:var(--body);font-size:15px;background:var(--bg);border-radius:4px;padding:12px;max-height:320px;overflow:auto}
+.copy{align-self:flex-start;font:inherit;font-weight:700;background:var(--accent);color:var(--bg);border:0;border-radius:6px;padding:10px 18px;cursor:pointer;min-height:44px}
+.foot{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:520px){.beat{grid-template-columns:54px minmax(0,1fr);gap:8px}.title{font-size:28px}.num{font-size:38px}.head{gap:10px;flex-wrap:wrap}}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .2s}}
+.price{background:var(--surface);border:1.5px solid var(--rose);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.price .amount{font-family:var(--display);font-size:56px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:16px;color:var(--muted);font-weight:600}
+</style>
+<div class="wrap" dir="rtl" lang="he">
+  <header>
+    <h1>בעבותות אהבה · סרטון הצטרפות לקבוצה</h1>
+    <p class="sub">רנת, אלה שתי הגרסאות לסרטון שמזמין אמהות להצטרף לקבוצת הווטסאפ. בכל גרסה סמני מאשרת, צריך תיקון או לא מאשרת, ואפשר לכתוב הערה. בסוף הדף יש כפתור ששולח לי את הכול בווטסאפ. יצחק</p>
+  </header>
+  <section class="notice" aria-labelledby="notice-h">
+    <p class="lbl" id="notice-h">זכויות שימוש</p>
+    <p>התסריטים, הרעיונות והניסוחים בדף הזה נכתבו על ידי יצחק עמית (AMIT), ונשלחים לעיון ולאישור בלבד. הזכויות בהם שמורות ליצחק עמית. מותר להשתמש בהם רק אם ההפקה נעשית איתו. אם לא ממשיכים בעבודה משותפת, אין להשתמש בתסריטים, להעתיק אותם או להפיק לפיהם סרטון, לבד או עם גורם אחר.</p>
+  </section>
+  <div class="bar"><span class="sync" id="prog"></span></div>
+  <h2 class="sec">התסריטים</h2>
+  <div class="legend"><span class="tag vo">🎙 קריינות</span> טקסט חדש שרנת מקליטה <span class="tag pod">🎧 פודקאסט</span> קטע מתוך "חמצן של אמונה", פרק 3</div>
+  <div id="videos" style="display:flex;flex-direction:column;gap:14px"></div>
+  <h2 class="sec">לפני ההפקה</h2>
+  <div id="plan" style="display:flex;flex-direction:column;gap:14px"></div>
+  <h2 class="sec">מחיר</h2>
+  <section class="price">
+    <div class="amount">₪950 <small>לפני מע״מ</small></div>
+    <p class="p"><b>לסרטון אחד גמור, בגרסה שתבחרו.</b></p>
+    <ul>
+      <li>כתיבת התסריט, כולל שתי הגרסאות לבחירה</li>
+      <li>בחירה וחיתוך של הקטעים מהפודקאסט</li>
+      <li>עריכה, כתוביות, מוזיקה ומסך סיום עם הלוגו</li>
+      <li>שני סבבי תיקונים</li>
+    </ul>
+  </section>
+  <section class="summary">
+    <p class="lbl">הערה כללית</p>
+    <textarea id="general" placeholder="כל דבר נוסף שתרצי להגיד" aria-label="הערה כללית"></textarea>
+    <p class="lbl">סיכום לשליחה</p>
+    <p class="p">הסימונים נשמרים במכשיר הזה, כך שאפשר לצאת ולחזור. כשסיימת, שלחי לי את הסיכום.</p>
+    <pre id="sumtxt"></pre>
+    <div class="btns">
+      <a class="copy" id="wa" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">שלחי ליצחק בווטסאפ</a>
+      <button class="dbtn" id="copy" type="button">העתק סיכום</button>
+    </div>
+    <p class="scr" style="margin:0">אם כפתור הווטסאפ לא נפתח, לחצי על "העתק סיכום" והדביקי לי בהודעה.</p>
+  </section>
+  <p class="foot">© יצחק עמית (AMIT). כל הזכויות בתסריטים שמורות. לעיון בלבד.</p>
+</div>
+<script>
+const POD = 'https://www.youtube.com/watch?v=eTai2qVsDqU';
+const DATA = {
+ videos:[
+  {id:"a", num:"א", kind_label:"קריינות + פודקאסט", title:"השילוב", goal:"הצטרפות לקבוצת הווטסאפ", len:"כ־50 שניות", cast:"רנת", rec:"כ־20 שניות קריינות חדשה", cta:"הקישור לקבוצה כאן למטה",
+   idea:"רנת מובילה את הסיפור בקריינות, ובין לבין נכנסים הרגעים החזקים שלה מהפודקאסט, בקול ובתמונה. כשמתנגן הפודקאסט רואים אותה באולפן, וכשהיא מקריינת רואים את הערבים, חדר הליווי והתעודות.",
+   why:"הקריינות מספרת את הסיפור בצורה מסודרת, והקטעים מהפודקאסט מראים את רנת אמיתית, מדברת מהלב. כך הצופה מקבל גם הסבר וגם היכרות.",
+   beats:[
+    {t:"0–4",k:"pod",at:"10:10",say:"אני תמיד אומרת לאמהות: התנגדות יוצרת אחיזה.",v:"קלוז־אפ של רנת באולפן",scr:"התנגדות יוצרת אחיזה"},
+    {t:"4–11",k:"vo",say:"את אומרת לא, והוא עושה דווקא. את מחפשת אותה בשתיים בלילה ולא יודעת איפה היא ועם מי. ואת מרגישה לבד.",v:"רנת מהורהרת, תאורה כהה",scr:"לא יודעת איפה היא. ועם מי."},
+    {t:"11–15",k:"pod",at:"1:58",say:"הגעתי לזה בעקבות שני ילדים שלי שהתמודדתי.",v:"רנת באולפן",scr:"רנת נרינסקי · אמא שהייתה שם"},
+    {t:"15–22",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו: בליווי אישי, בסדנאות ובמעגלי שיח של אמהות שעוברות בדיוק את מה שאת עוברת.",v:"חדר הליווי, ערב עם נשים, התעודות בהבזק",scr:"ליווי אישי · סדנאות · מעגלי שיח"},
+    {t:"22–28",k:"pod",at:"5:34",say:"מי אני שאני לא אסתכל על הילד שלי ואגיד: וואו, יש לו נשמה טהורה.",v:"רנת באולפן",scr:"להסתכל על הנשמה"},
+    {t:"28–31",k:"pod",at:"30:45",say:"גבול זה לא חומה. גבול זה ביטחון.",v:"רנת באולפן, זווית אחרת",scr:"גבול = ביטחון"},
+    {t:"31–40",k:"vo",say:"את הכלים האלה אני נותנת כל שבוע בקבוצת הווטסאפ שלי. יש בה מאות אמהות, יש טיפים, יש תשובות לשאלות, ויש חיבוק. בלי שיפוט.",v:"הערב הגדול סביב השולחן הארוך, נשים מקשיבות",scr:"מאות אמהות כבר בפנים"},
+    {t:"40–44",k:"pod",at:"28:53",say:"את חלק מהמסע של הבת שלך, של הבן שלך.",v:"רנת באולפן, מבט למצלמה",scr:""},
+    {t:"44–50",k:"vo",say:"הקישור לקבוצה כאן למטה. בואי, את לא לבד.",v:"מסך סיום: הלוגו, ורנת בפינה",scr:"הצטרפי לקבוצה ← · בעבותות אהבה · 055-9260941"}
+   ],
+   notes:["מוזיקה רכה ואמהית, פסנתר או מיתרים. המוזיקה יורדת בכל פעם שנכנס קטע מהפודקאסט.","כתוביות על כל הסרטון, כי רוב האנשים צופים בלי קול.","את הקטעים מהפודקאסט חותכים מהפרק המלא ביוטיוב. הזמנים בטבלה הם נקודות פתיחה."]},
+  {id:"b", num:"ב", kind_label:"רק קריינות", title:"הקול של רנת", goal:"הצטרפות לקבוצת הווטסאפ", len:"כ־45 שניות", cast:"רנת", rec:"כ־45 שניות קריינות חדשה", cta:"הקישור לקבוצה כאן למטה",
+   idea:"רנת מקריינת את כל הסרטון, בטון רגוע ואינטימי, כמו שיחה עם חברה. המשפטים החזקים שלה מהפודקאסט נכנסים לטקסט, אבל היא אומרת אותם מחדש. על המסך: צילומי אווירה מהפודקאסט, מהערבים ומחדר הליווי.",
+   why:"סרטון אחיד ונקי, שבו כל מילה כתובה מראש. מתאים אם רוצים שליטה מלאה בניסוח ובקצב.",
+   beats:[
+    {t:"0–4",k:"vo",say:"אמא, יש משפט אחד שאני חוזרת עליו כל יום: התנגדות יוצרת אחיזה.",v:"רנת באולפן, בלי הסאונד של הפודקאסט",scr:"התנגדות יוצרת אחיזה"},
+    {t:"4–10",k:"vo",say:"ככל שתגידי לא, הוא ילך ויעשה את זה דווקא. ואת נשארת ערה בלילה, מחכה לשמוע את המפתח בדלת.",v:"רנת מהורהרת, תאורה כהה",scr:"מחכה לשמוע את המפתח בדלת"},
+    {t:"10–17",k:"vo",say:"אני יודעת איך זה מרגיש. הגעתי לתחום הזה בעקבות שניים מהילדים שלי. אז רק ראיתי את עצמי: את הכעס, את הבושה. לא ראיתי אותם.",v:"רנת באולפן, רגע שקט",scr:"אמא שהייתה שם"},
+    {t:"17–25",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו. ואני מלמדת להסתכל על הנשמה, לא על החצאית, לא על התספורת. כי גבול זה לא חומה. גבול זה ביטחון.",v:"חדר הליווי, רנת מדברת מול נשים, התעודות",scr:"להסתכל על הנשמה · גבול = ביטחון"},
+    {t:"25–35",k:"vo",say:"בקבוצת הווטסאפ שלי יש כבר מאות אמהות. כל שבוע אני מעלה כלים וטיפים, ועונה על שאלות שאת מתביישת לשאול בקול. בלי שיפוט, רק חיבוק וכלים.",v:"הערב הגדול, נשים צוחקות ומקשיבות",scr:"מאות אמהות כבר בפנים"},
+    {t:"35–45",k:"vo",say:"את לא צריכה לעבור את זה לבד. הקישור לקבוצה כאן למטה. בואי.",v:"רנת למצלמה, ואז מסך הסיום עם הלוגו",scr:"הצטרפי לקבוצה ← · בעבותות אהבה · 055-9260941"}
+   ],
+   notes:["הקלטה בחדר שקט מספיקה, גם בטלפון. כדאי להקליט שתיים או שלוש פעמים כל משפט.","מוזיקה רכה לאורך כל הסרטון.","כתוביות על כל הסרטון."]}
+ ],
+ plan:[
+  {id:"p1", title:"מה צריך מרנת", intro:"כדי לסגור את התסריט הסופי ולהתחיל לערוך.", groups:[
+   {h:"פרטים", rows:["הקישור לקבוצת הווטסאפ, והאם ההצטרפות בחינם","כמה אמהות יש בקבוצה היום. בתסריט כתוב \"מאות אמהות\". אם זה בערך 150, נכתוב \"כבר 150 אמהות\"","אישור שמותר להזכיר בסרטון את הסיפור על שני הילדים","איפה הסרטון יעלה: סטטוס, פייסבוק, אינסטגרם, ממומן"]},
+   {h:"הקלטה", rows:["גרסה א': כ־20 שניות קריינות","גרסה ב': כ־45 שניות קריינות","כדאי להקליט את שתי הגרסאות באותו מפגש, ואז אפשר להריץ את שתיהן בפרסום ולבדוק איזו עובדת טוב יותר"]}
+  ]},
+  {id:"p2", title:"החומרים שישמשו בסרטון", intro:"מהתיקייה ששלחתן, ומהפרק השלישי של הפודקאסט ביוטיוב.", groups:[
+   {h:"צילומים", rows:["פודקאסט: רנת באולפן (הסרטונים מספטמבר ומנובמבר, והקליפים עם הכתוביות)","ערבים ומעגלי שיח: הסרטונים מיולי והתמונות והסרטונים ממאי","חדר הליווי, סט האולפן עם הלוגו, התעודות, הלוגו של בעבותות אהבה"]},
+   {h:"לוודא", rows:["מה זה \"טריילר נבחרת לחיות\", והאם להשתמש בו","האם יש קובץ מלא של פרק 3 באיכות גבוהה (עדיף על הורדה מיוטיוב)"]}
+  ]}
+ ]
+};
+const LABEL = {pending:'עוד לא סומן', approved:'מאושר', fix:'צריך תיקון', rejected:'לא מאושר'};
+const KEY='rn-client-r1';
+const items = [...DATA.videos.map(v=>({id:v.id, name:'גרסה '+v.num+': '+v.title})), ...DATA.plan.map(p=>({id:p.id, name:p.title}))];
+const state = {general:''}; items.forEach(i=>state[i.id]={status:'pending', note:''});
+try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s){ items.forEach(i=>{ if(s[i.id]&&LABEL[s[i.id].status]) state[i.id]={status:s[i.id].status, note:String(s[i.id].note||'')}; }); state.general=String(s.general||''); } }catch(e){}
+const el=(tag,cls,txt)=>{const e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;};
+function store(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function list(arr){ const u=el('ul'); arr.forEach(x=>u.append(el('li',null,x))); return u; }
+function block(label,node){ const d=el('div'); d.append(el('p','lbl',label), node); return d; }
+function decide(id){
+  const d=el('div','decide'), btns=el('div','btns');
+  const ta=el('textarea'); ta.id='note-'+id; ta.placeholder='מה לתקן? אפשר לכתוב כאן כל הערה.'; ta.setAttribute('aria-label','הערה'); ta.value=state[id].note;
+  [['approved','מאשרת'],['fix','צריך תיקון'],['rejected','לא מאשרת']].forEach(([s,t])=>{
+    const bt=el('button','dbtn '+s,t); bt.type='button'; bt.id='btn-'+id+'-'+s;
+    bt.onclick=()=>{ state[id].status = state[id].status===s ? 'pending' : s; store(); paint(id); if(s!=='approved'&&state[id].status===s) ta.focus(); };
+    btns.append(bt); });
+  ta.oninput=()=>{ state[id].note=ta.value; store(); summary(); };
+  d.append(btns,ta); return d;
+}
+function shell(id,num,kind,title,body){
+  const c=el('article','card'); c.id='card-'+id;
+  const h=el('button','head'); h.type='button'; h.setAttribute('aria-expanded','true');
+  h.append(el('div','num',num));
+  const ht=el('div','ht'); ht.append(el('div','kind',kind), el('div','title',title)); h.append(ht);
+  const pill=el('span','pill'); pill.id='pill-'+id; h.append(pill);
+  h.onclick=()=>{ const cl=c.classList.toggle('closed'); h.setAttribute('aria-expanded',String(!cl)); };
+  c.append(h, body, decide(id)); return c;
+}
+function videoCard(v){
+  const b=el('div','body'), m=el('div','meta');
+  [['מטרה',v.goal],['אורך',v.len],['בתמונה',v.cast],['הקלטה',v.rec],['הנעה',v.cta]].forEach(([k,val])=>{
+    const s=el('span'); s.append(el('b',null,k+': '), document.createTextNode(val)); m.append(s); });
+  b.append(m, block('הרעיון', el('p','p',v.idea)), block('למה זה עובד', el('p','p',v.why)));
+  const beats=el('div','beats');
+  v.beats.forEach(x=>{ const r=el('div','beat'); r.append(el('div','time',x.t));
+    const bd=el('div','bd');
+    bd.append(el('span','tag '+x.k, x.k==='pod' ? '🎧 פודקאסט · '+x.at : '🎙 קריינות'));
+    bd.append(el('p','say'+(x.k==='pod'?' pod':''), x.say));
+    if(x.v) bd.append(el('p','see','רואים: '+x.v));
+    if(x.scr) bd.append(el('p','scr','על המסך: '+x.scr));
+    r.append(bd); beats.append(r); });
+  b.append(block('התסריט, לפי שניות', beats), block('הערות הפקה', list(v.notes)));
+  if(v.beats.some(x=>x.k==='pod')){
+    const w=el('div','verify'); w.append(el('p','lbl','הקטעים מהפודקאסט'));
+    const p=el('p','p'); p.append(document.createTextNode('כל הקטעים מהפרק "להתמודד עם המתמודד". אפשר לשמוע כל אחד בזמן שמסומן לידו: '));
+    const a=el('a',null,'לפרק ביוטיוב'); a.href=POD; a.target='_blank'; a.rel='noopener'; p.append(a);
+    w.append(p); b.append(w);
+  }
+  return shell(v.id, v.num, 'גרסה '+v.num+' · '+v.kind_label, v.title, b);
+}
+function planCard(p,i){
+  const b=el('div','body'); b.append(el('p','p',p.intro));
+  p.groups.forEach(g=>{ const u=list(g.rows); u.className='rows'; b.append(block(g.h,u)); });
+  return shell(p.id, String(i+1), 'לפני ההפקה', p.title, b);
+}
+function paint(id){
+  const s=state[id].status, pill=document.getElementById('pill-'+id); pill.className='pill '+s; pill.textContent=LABEL[s];
+  ['approved','fix','rejected'].forEach(k=>document.getElementById('btn-'+id+'-'+k).setAttribute('aria-pressed',String(s===k)));
+  summary();
+}
+function summary(){
+  const lines=['בעבותות אהבה, סרטון הצטרפות לקבוצה – התשובות של רנת:',''];
+  items.forEach(i=>{ const s=state[i.id]; lines.push(i.name+' — '+LABEL[s.status]+(s.note.trim()?(' — '+s.note.trim()):'')); });
+  if(state.general.trim()) lines.push('', 'הערה כללית: '+state.general.trim());
+  const txt=lines.join('\n');
+  document.getElementById('sumtxt').textContent=txt;
+  document.getElementById('wa').href='https://wa.me/?text='+encodeURIComponent(txt);
+  const done=DATA.videos.filter(v=>state[v.id].status!=='pending').length;
+  document.getElementById('prog').textContent='סימנת '+done+' מתוך '+DATA.videos.length+' גרסאות';
+}
+const V=document.getElementById('videos'), P=document.getElementById('plan');
+DATA.videos.forEach(v=>V.append(videoCard(v))); DATA.plan.forEach((p,i)=>P.append(planCard(p,i)));
+items.forEach(i=>paint(i.id));
+const g=document.getElementById('general'); g.value=state.general; g.oninput=()=>{ state.general=g.value; store(); summary(); };
+document.getElementById('copy').onclick=async()=>{
+  const pre=document.getElementById('sumtxt'), btn=document.getElementById('copy');
+  try{ await navigator.clipboard.writeText(pre.textContent); btn.textContent='הועתק'; }
+  catch(e){ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='סומן. אפשר להעתיק'; }
+  setTimeout(()=>btn.textContent='העתק סיכום',2500);
+};
+</script>
+</body></html>
