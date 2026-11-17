@@ -86,144 +86,89 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:74px;border:1.
 .price{background:var(--surface);border:1.5px solid var(--rose);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
 .price .amount{font-family:var(--display);font-size:56px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
 .price small{font-family:var(--body);font-size:16px;color:var(--muted);font-weight:600}
+.idea{font-size:17px;color:var(--ink)}.see{font-size:15px;color:var(--ink)}.price{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 18px}.price .amount{font-size:44px}
 </style>
 <div class="wrap" dir="rtl" lang="he">
   <header>
     <h1>בעבותות אהבה · סרטון הצטרפות לקבוצה</h1>
-    <p class="sub">רנת, אלה שתי הגרסאות לסרטון שמזמין אמהות להצטרף לקבוצת הווטסאפ. בכל גרסה סמני מאשרת, צריך תיקון או לא מאשרת, ואפשר לכתוב הערה. בסוף הדף יש כפתור ששולח לי את הכול בווטסאפ. יצחק</p>
+    <p class="sub">רנת, אלה שתי הגרסאות לסרטון. בכל אחת אפשר לסמן מאשרת, צריך תיקון או לא מאשרת, ולכתוב הערה. בסוף יש כפתור ששולח לי את התשובות בווטסאפ. יצחק</p>
   </header>
   <section class="notice" aria-labelledby="notice-h">
     <p class="lbl" id="notice-h">זכויות שימוש</p>
     <p>התסריטים, הרעיונות והניסוחים בדף הזה נכתבו על ידי יצחק עמית (AMIT), ונשלחים לעיון ולאישור בלבד. הזכויות בהם שמורות ליצחק עמית. מותר להשתמש בהם רק אם ההפקה נעשית איתו. אם לא ממשיכים בעבודה משותפת, אין להשתמש בתסריטים, להעתיק אותם או להפיק לפיהם סרטון, לבד או עם גורם אחר.</p>
   </section>
-  <div class="bar"><span class="sync" id="prog"></span></div>
-  <h2 class="sec">התסריטים</h2>
-  <div class="legend"><span class="tag vo">🎙 קריינות</span> טקסט חדש שרנת מקליטה <span class="tag pod">🎧 פודקאסט</span> קטע מתוך "חמצן של אמונה", פרק 3</div>
+  <div class="legend"><span class="tag vo">🎙 קריינות</span> רנת מקריינת <span class="tag pod">🎧 פודקאסט</span> רגע מתוך הפודקאסט "חמצן של אמונה"</div>
   <div id="videos" style="display:flex;flex-direction:column;gap:14px"></div>
-  <h2 class="sec">לפני ההפקה</h2>
-  <div id="plan" style="display:flex;flex-direction:column;gap:14px"></div>
-  <h2 class="sec">מחיר</h2>
   <section class="price">
     <div class="amount">₪950 <small>לפני מע״מ</small></div>
-    <p class="p"><b>לסרטון אחד גמור, בגרסה שתבחרו.</b></p>
-    <ul>
-      <li>כתיבת התסריט, כולל שתי הגרסאות לבחירה</li>
-      <li>בחירה וחיתוך של הקטעים מהפודקאסט</li>
-      <li>עריכה, כתוביות, מוזיקה ומסך סיום עם הלוגו</li>
-      <li>שני סבבי תיקונים</li>
-    </ul>
+    <p class="p">סרטון אחד גמור, בגרסה שתבחרו: תסריט, עריכה, כתוביות, מוזיקה ושני סבבי תיקונים.</p>
   </section>
   <section class="summary">
-    <p class="lbl">הערה כללית</p>
-    <textarea id="general" placeholder="כל דבר נוסף שתרצי להגיד" aria-label="הערה כללית"></textarea>
-    <p class="lbl">סיכום לשליחה</p>
-    <p class="p">הסימונים נשמרים במכשיר הזה, כך שאפשר לצאת ולחזור. כשסיימת, שלחי לי את הסיכום.</p>
-    <pre id="sumtxt"></pre>
+    <p class="p" id="prog"></p>
+    <pre id="sumtxt" hidden></pre>
     <div class="btns">
       <a class="copy" id="wa" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">שלחי ליצחק בווטסאפ</a>
-      <button class="dbtn" id="copy" type="button">העתק סיכום</button>
+      <button class="dbtn" id="copy" type="button">העתק תשובות</button>
     </div>
-    <p class="scr" style="margin:0">אם כפתור הווטסאפ לא נפתח, לחצי על "העתק סיכום" והדביקי לי בהודעה.</p>
   </section>
   <p class="foot">© יצחק עמית (AMIT). כל הזכויות בתסריטים שמורות. לעיון בלבד.</p>
 </div>
 <script>
-const POD = 'https://www.youtube.com/watch?v=eTai2qVsDqU';
-const DATA = {
- videos:[
-  {id:"a", num:"א", kind_label:"קריינות + פודקאסט", title:"השילוב", goal:"הצטרפות לקבוצת הווטסאפ", len:"כ־50 שניות", cast:"רנת", rec:"כ־20 שניות קריינות חדשה", cta:"הקישור לקבוצה כאן למטה",
-   idea:"רנת מובילה את הסיפור בקריינות, ובין לבין נכנסים הרגעים החזקים שלה מהפודקאסט, בקול ובתמונה. כשמתנגן הפודקאסט רואים אותה באולפן, וכשהיא מקריינת רואים את הערבים, חדר הליווי והתעודות.",
-   why:"הקריינות מספרת את הסיפור בצורה מסודרת, והקטעים מהפודקאסט מראים את רנת אמיתית, מדברת מהלב. כך הצופה מקבל גם הסבר וגם היכרות.",
-   beats:[
-    {t:"0–4",k:"pod",at:"10:10",say:"אני תמיד אומרת לאמהות: התנגדות יוצרת אחיזה.",v:"קלוז־אפ של רנת באולפן",scr:"התנגדות יוצרת אחיזה"},
-    {t:"4–11",k:"vo",say:"את אומרת לא, והוא עושה דווקא. את מחפשת אותה בשתיים בלילה ולא יודעת איפה היא ועם מי. ואת מרגישה לבד.",v:"רנת מהורהרת, תאורה כהה",scr:"לא יודעת איפה היא. ועם מי."},
-    {t:"11–15",k:"pod",at:"1:58",say:"הגעתי לזה בעקבות שני ילדים שלי שהתמודדתי.",v:"רנת באולפן",scr:"רנת נרינסקי · אמא שהייתה שם"},
-    {t:"15–22",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו: בליווי אישי, בסדנאות ובמעגלי שיח של אמהות שעוברות בדיוק את מה שאת עוברת.",v:"חדר הליווי, ערב עם נשים, התעודות בהבזק",scr:"ליווי אישי · סדנאות · מעגלי שיח"},
-    {t:"22–28",k:"pod",at:"5:34",say:"מי אני שאני לא אסתכל על הילד שלי ואגיד: וואו, יש לו נשמה טהורה.",v:"רנת באולפן",scr:"להסתכל על הנשמה"},
-    {t:"28–31",k:"pod",at:"30:45",say:"גבול זה לא חומה. גבול זה ביטחון.",v:"רנת באולפן, זווית אחרת",scr:"גבול = ביטחון"},
-    {t:"31–40",k:"vo",say:"את הכלים האלה אני נותנת כל שבוע בקבוצת הווטסאפ שלי. יש בה מאות אמהות, יש טיפים, יש תשובות לשאלות, ויש חיבוק. בלי שיפוט.",v:"הערב הגדול סביב השולחן הארוך, נשים מקשיבות",scr:"מאות אמהות כבר בפנים"},
-    {t:"40–44",k:"pod",at:"28:53",say:"את חלק מהמסע של הבת שלך, של הבן שלך.",v:"רנת באולפן, מבט למצלמה",scr:""},
-    {t:"44–50",k:"vo",say:"הקישור לקבוצה כאן למטה. בואי, את לא לבד.",v:"מסך סיום: הלוגו, ורנת בפינה",scr:"הצטרפי לקבוצה ← · בעבותות אהבה · 055-9260941"}
-   ],
-   notes:["מוזיקה רכה ואמהית, פסנתר או מיתרים. המוזיקה יורדת בכל פעם שנכנס קטע מהפודקאסט.","כתוביות על כל הסרטון, כי רוב האנשים צופים בלי קול.","את הקטעים מהפודקאסט חותכים מהפרק המלא ביוטיוב. הזמנים בטבלה הם נקודות פתיחה."]},
-  {id:"b", num:"ב", kind_label:"רק קריינות", title:"הקול של רנת", goal:"הצטרפות לקבוצת הווטסאפ", len:"כ־45 שניות", cast:"רנת", rec:"כ־45 שניות קריינות חדשה", cta:"הקישור לקבוצה כאן למטה",
-   idea:"רנת מקריינת את כל הסרטון, בטון רגוע ואינטימי, כמו שיחה עם חברה. המשפטים החזקים שלה מהפודקאסט נכנסים לטקסט, אבל היא אומרת אותם מחדש. על המסך: צילומי אווירה מהפודקאסט, מהערבים ומחדר הליווי.",
-   why:"סרטון אחיד ונקי, שבו כל מילה כתובה מראש. מתאים אם רוצים שליטה מלאה בניסוח ובקצב.",
-   beats:[
-    {t:"0–4",k:"vo",say:"אמא, יש משפט אחד שאני חוזרת עליו כל יום: התנגדות יוצרת אחיזה.",v:"רנת באולפן, בלי הסאונד של הפודקאסט",scr:"התנגדות יוצרת אחיזה"},
-    {t:"4–10",k:"vo",say:"ככל שתגידי לא, הוא ילך ויעשה את זה דווקא. ואת נשארת ערה בלילה, מחכה לשמוע את המפתח בדלת.",v:"רנת מהורהרת, תאורה כהה",scr:"מחכה לשמוע את המפתח בדלת"},
-    {t:"10–17",k:"vo",say:"אני יודעת איך זה מרגיש. הגעתי לתחום הזה בעקבות שניים מהילדים שלי. אז רק ראיתי את עצמי: את הכעס, את הבושה. לא ראיתי אותם.",v:"רנת באולפן, רגע שקט",scr:"אמא שהייתה שם"},
-    {t:"17–25",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו. ואני מלמדת להסתכל על הנשמה, לא על החצאית, לא על התספורת. כי גבול זה לא חומה. גבול זה ביטחון.",v:"חדר הליווי, רנת מדברת מול נשים, התעודות",scr:"להסתכל על הנשמה · גבול = ביטחון"},
-    {t:"25–35",k:"vo",say:"בקבוצת הווטסאפ שלי יש כבר מאות אמהות. כל שבוע אני מעלה כלים וטיפים, ועונה על שאלות שאת מתביישת לשאול בקול. בלי שיפוט, רק חיבוק וכלים.",v:"הערב הגדול, נשים צוחקות ומקשיבות",scr:"מאות אמהות כבר בפנים"},
-    {t:"35–45",k:"vo",say:"את לא צריכה לעבור את זה לבד. הקישור לקבוצה כאן למטה. בואי.",v:"רנת למצלמה, ואז מסך הסיום עם הלוגו",scr:"הצטרפי לקבוצה ← · בעבותות אהבה · 055-9260941"}
-   ],
-   notes:["הקלטה בחדר שקט מספיקה, גם בטלפון. כדאי להקליט שתיים או שלוש פעמים כל משפט.","מוזיקה רכה לאורך כל הסרטון.","כתוביות על כל הסרטון."]}
- ],
- plan:[
-  {id:"p1", title:"מה צריך מרנת", intro:"כדי לסגור את התסריט הסופי ולהתחיל לערוך.", groups:[
-   {h:"פרטים", rows:["הקישור לקבוצת הווטסאפ, והאם ההצטרפות בחינם","כמה אמהות יש בקבוצה היום. בתסריט כתוב \"מאות אמהות\". אם זה בערך 150, נכתוב \"כבר 150 אמהות\"","אישור שמותר להזכיר בסרטון את הסיפור על שני הילדים","איפה הסרטון יעלה: סטטוס, פייסבוק, אינסטגרם, ממומן"]},
-   {h:"הקלטה", rows:["גרסה א': כ־20 שניות קריינות","גרסה ב': כ־45 שניות קריינות","כדאי להקליט את שתי הגרסאות באותו מפגש, ואז אפשר להריץ את שתיהן בפרסום ולבדוק איזו עובדת טוב יותר"]}
+const DATA = {videos:[
+ {id:"a", num:"א", kind:"קריינות ורגעים מהפודקאסט", title:"משתיים בלילה עד הבוקר", len:"כ־45 שניות",
+  idea:"הסרטון עובר מלילה לבוקר. הוא נפתח באמא שמחכה במטבח החשוך, וממשיך דרך הסיפור של רנת והכלים שלה. בסוף מגיע בוקר: הבת חוזרת הביתה, ויש חיבוק. רנת מספרת בקריינות, ושלושה רגעים קצרים מהפודקאסט נכנסים בדיוק במקומות הנכונים.",
+  beats:[
+   {t:"0–5",k:"vo",say:"שתיים בלילה. היא עוד לא חזרה, והטלפון שלה כבוי.",v:"מטבח חשוך. אמא יושבת ליד השולחן, רק אור המסך של הטלפון על הפנים שלה. שעון על הקיר: 02:07.",scr:"02:07"},
+   {t:"5–10",k:"vo",say:"ואת יושבת ושואלת את עצמך: איפה טעיתי?",v:"צילומים קרובים: מסך עם שיחות שלא נענו, ידית הדלת, היד של האמא נוגעת בה ונעצרת.",scr:""},
+   {t:"10–14",k:"pod",say:"הגעתי לזה בעקבות שני ילדים שלי שהתמודדתי.",v:"רנת באולפן, קרוב, מבט רציני.",scr:"רנת נרינסקי"},
+   {t:"14–22",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו. ואחרי כל השנים האלה, יש משפט אחד שאני חוזרת עליו כל הזמן:",v:"רנת יושבת מול קבוצת נשים בערב, נשים מקשיבות, ואז חדר הליווי השקט עם שתי הכורסאות.",scr:"ליווי הורים ונוער מתמודד"},
+   {t:"22–26",k:"pod",say:"התנגדות יוצרת אחיזה.",v:"רנת באולפן, מבט ישר למצלמה.",scr:"התנגדות יוצרת אחיזה"},
+   {t:"26–35",k:"vo",say:"כשמפסיקים להילחם בילד ומתחילים לראות אותו, משהו נפתח. על זה אני מדברת כל שבוע בקבוצת הווטסאפ שלי, עם מאות אמהות שמבינות אותך בלי שתצטרכי להסביר.",v:"אור ראשון של בוקר במטבח. אמא מניחה כוס תה ליד הבת, והבת לא מתרחקת. ואז טלפון ביד, קבוצת ווטסאפ פתוחה, הודעות של חיזוק עולות.",scr:"מאות אמהות כבר בקבוצה"},
+   {t:"35–39",k:"pod",say:"את חלק מהמסע של הבת שלך.",v:"רנת באולפן, חיוך קטן.",scr:""},
+   {t:"39–45",k:"vo",say:"בואי להצטרף. הקישור כאן למטה. את לא לבד.",v:"הדלת נפתחת בבוקר, הבת נכנסת, והאמא מחבקת אותה. מעבר למסך הסיום עם הלוגו.",scr:"הצטרפי לקבוצה ← · בעבותות אהבה"}
   ]},
-  {id:"p2", title:"החומרים שישמשו בסרטון", intro:"מהתיקייה ששלחתן, ומהפרק השלישי של הפודקאסט ביוטיוב.", groups:[
-   {h:"צילומים", rows:["פודקאסט: רנת באולפן (הסרטונים מספטמבר ומנובמבר, והקליפים עם הכתוביות)","ערבים ומעגלי שיח: הסרטונים מיולי והתמונות והסרטונים ממאי","חדר הליווי, סט האולפן עם הלוגו, התעודות, הלוגו של בעבותות אהבה"]},
-   {h:"לוודא", rows:["מה זה \"טריילר נבחרת לחיות\", והאם להשתמש בו","האם יש קובץ מלא של פרק 3 באיכות גבוהה (עדיף על הורדה מיוטיוב)"]}
+ {id:"b", num:"ב", kind:"רק קריינות", title:"הקול של רנת", len:"כ־45 שניות",
+  idea:"רנת מקריינת את כל הסרטון בטון רגוע, כמו שיחה עם חברה. התמונה מתחלפת כל הזמן: לילה בבית, רגעים בין אמא לבת, הערבים והחדר של רנת, ורק מעט מהאולפן.",
+  beats:[
+   {t:"0–4",k:"vo",say:"אמא, יש משפט אחד שאני חוזרת עליו כל יום: התנגדות יוצרת אחיזה.",v:"רנת קרוב, מבט למצלמה.",scr:"התנגדות יוצרת אחיזה"},
+   {t:"4–10",k:"vo",say:"ככל שתגידי לא, הוא ילך ויעשה את זה דווקא. ואת נשארת ערה בלילה, מחכה לשמוע את המפתח בדלת.",v:"דלת של חדר נטרקת. אחר כך לילה: אמא ליד החלון, ומפתחות על השולחן בכניסה.",scr:"מחכה לשמוע את המפתח בדלת"},
+   {t:"10–17",k:"vo",say:"אני יודעת איך זה מרגיש. הגעתי לתחום הזה בעקבות שניים מהילדים שלי. אז רק ראיתי את עצמי: את הכעס, את הבושה. לא ראיתי אותם.",v:"רנת מהורהרת. ידיים מדפדפות באלבום תמונות ישן של ילדים קטנים.",scr:"אמא שהייתה שם"},
+   {t:"17–25",k:"vo",say:"היום אני מלווה הורים לנוער מתמודד, וגם את הנוער עצמו. ואני מלמדת להסתכל על הנשמה, לא על החצאית, לא על התספורת. כי גבול זה לא חומה. גבול זה ביטחון.",v:"נערה מצולמת מאחור, שיער ועגילים. המבט של האמא עליה מתרכך. ואז רנת בחדר הליווי מול אמא.",scr:"להסתכל על הנשמה"},
+   {t:"25–35",k:"vo",say:"בקבוצת הווטסאפ שלי יש כבר מאות אמהות. כל שבוע אני מעלה כלים וטיפים, ועונה על שאלות שאת מתביישת לשאול בקול. בלי שיפוט, רק חיבוק וכלים.",v:"ערב של נשים סביב שולחן, צחוק. אחר כך יד של אמא גוללת בקבוצת הווטסאפ במטבח.",scr:"מאות אמהות כבר בקבוצה"},
+   {t:"35–45",k:"vo",say:"את לא צריכה לעבור את זה לבד. הקישור לקבוצה כאן למטה. בואי.",v:"בוקר. אמא ובת על הספה, הבת מניחה ראש על הכתף. מעבר למסך הסיום עם הלוגו.",scr:"הצטרפי לקבוצה ← · בעבותות אהבה"}
   ]}
- ]
-};
+]};
 const LABEL = {pending:'עוד לא סומן', approved:'מאושר', fix:'צריך תיקון', rejected:'לא מאושר'};
-const KEY='rn-client-r1';
-const items = [...DATA.videos.map(v=>({id:v.id, name:'גרסה '+v.num+': '+v.title})), ...DATA.plan.map(p=>({id:p.id, name:p.title}))];
-const state = {general:''}; items.forEach(i=>state[i.id]={status:'pending', note:''});
-try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s){ items.forEach(i=>{ if(s[i.id]&&LABEL[s[i.id].status]) state[i.id]={status:s[i.id].status, note:String(s[i.id].note||'')}; }); state.general=String(s.general||''); } }catch(e){}
+const KEY='rn-client-r2';
+const state = {}; DATA.videos.forEach(v=>state[v.id]={status:'pending', note:''});
+try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s){ DATA.videos.forEach(v=>{ if(s[v.id]&&LABEL[s[v.id].status]) state[v.id]={status:s[v.id].status, note:String(s[v.id].note||'')}; }); } }catch(e){}
 const el=(tag,cls,txt)=>{const e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e;};
 function store(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
-function list(arr){ const u=el('ul'); arr.forEach(x=>u.append(el('li',null,x))); return u; }
-function block(label,node){ const d=el('div'); d.append(el('p','lbl',label), node); return d; }
-function decide(id){
+function card(v){
+  const id=v.id, c=el('article','card'); c.id='card-'+id;
+  const h=el('button','head'); h.type='button'; h.setAttribute('aria-expanded','true');
+  h.append(el('div','num',v.num));
+  const ht=el('div','ht'); ht.append(el('div','kind','גרסה '+v.num+' · '+v.kind+' · '+v.len), el('div','title',v.title)); h.append(ht);
+  const pill=el('span','pill'); pill.id='pill-'+id; h.append(pill);
+  h.onclick=()=>{ const cl=c.classList.toggle('closed'); h.setAttribute('aria-expanded',String(!cl)); };
+  const b=el('div','body'); b.append(el('p','p idea',v.idea));
+  const beats=el('div','beats');
+  v.beats.forEach(x=>{ const r=el('div','beat'); r.append(el('div','time',x.t));
+    const bd=el('div','bd');
+    bd.append(el('span','tag '+x.k, x.k==='pod'?'🎧 פודקאסט':'🎙 קריינות'));
+    bd.append(el('p','say'+(x.k==='pod'?' pod':''), x.say));
+    bd.append(el('p','see',x.v));
+    if(x.scr) bd.append(el('p','scr','על המסך: '+x.scr));
+    r.append(bd); beats.append(r); });
+  b.append(beats);
   const d=el('div','decide'), btns=el('div','btns');
-  const ta=el('textarea'); ta.id='note-'+id; ta.placeholder='מה לתקן? אפשר לכתוב כאן כל הערה.'; ta.setAttribute('aria-label','הערה'); ta.value=state[id].note;
+  const ta=el('textarea'); ta.id='note-'+id; ta.placeholder='הערות לגרסה הזאת'; ta.setAttribute('aria-label','הערה'); ta.value=state[id].note;
   [['approved','מאשרת'],['fix','צריך תיקון'],['rejected','לא מאשרת']].forEach(([s,t])=>{
     const bt=el('button','dbtn '+s,t); bt.type='button'; bt.id='btn-'+id+'-'+s;
     bt.onclick=()=>{ state[id].status = state[id].status===s ? 'pending' : s; store(); paint(id); if(s!=='approved'&&state[id].status===s) ta.focus(); };
     btns.append(bt); });
   ta.oninput=()=>{ state[id].note=ta.value; store(); summary(); };
-  d.append(btns,ta); return d;
-}
-function shell(id,num,kind,title,body){
-  const c=el('article','card'); c.id='card-'+id;
-  const h=el('button','head'); h.type='button'; h.setAttribute('aria-expanded','true');
-  h.append(el('div','num',num));
-  const ht=el('div','ht'); ht.append(el('div','kind',kind), el('div','title',title)); h.append(ht);
-  const pill=el('span','pill'); pill.id='pill-'+id; h.append(pill);
-  h.onclick=()=>{ const cl=c.classList.toggle('closed'); h.setAttribute('aria-expanded',String(!cl)); };
-  c.append(h, body, decide(id)); return c;
-}
-function videoCard(v){
-  const b=el('div','body'), m=el('div','meta');
-  [['מטרה',v.goal],['אורך',v.len],['בתמונה',v.cast],['הקלטה',v.rec],['הנעה',v.cta]].forEach(([k,val])=>{
-    const s=el('span'); s.append(el('b',null,k+': '), document.createTextNode(val)); m.append(s); });
-  b.append(m, block('הרעיון', el('p','p',v.idea)), block('למה זה עובד', el('p','p',v.why)));
-  const beats=el('div','beats');
-  v.beats.forEach(x=>{ const r=el('div','beat'); r.append(el('div','time',x.t));
-    const bd=el('div','bd');
-    bd.append(el('span','tag '+x.k, x.k==='pod' ? '🎧 פודקאסט · '+x.at : '🎙 קריינות'));
-    bd.append(el('p','say'+(x.k==='pod'?' pod':''), x.say));
-    if(x.v) bd.append(el('p','see','רואים: '+x.v));
-    if(x.scr) bd.append(el('p','scr','על המסך: '+x.scr));
-    r.append(bd); beats.append(r); });
-  b.append(block('התסריט, לפי שניות', beats), block('הערות הפקה', list(v.notes)));
-  if(v.beats.some(x=>x.k==='pod')){
-    const w=el('div','verify'); w.append(el('p','lbl','הקטעים מהפודקאסט'));
-    const p=el('p','p'); p.append(document.createTextNode('כל הקטעים מהפרק "להתמודד עם המתמודד". אפשר לשמוע כל אחד בזמן שמסומן לידו: '));
-    const a=el('a',null,'לפרק ביוטיוב'); a.href=POD; a.target='_blank'; a.rel='noopener'; p.append(a);
-    w.append(p); b.append(w);
-  }
-  return shell(v.id, v.num, 'גרסה '+v.num+' · '+v.kind_label, v.title, b);
-}
-function planCard(p,i){
-  const b=el('div','body'); b.append(el('p','p',p.intro));
-  p.groups.forEach(g=>{ const u=list(g.rows); u.className='rows'; b.append(block(g.h,u)); });
-  return shell(p.id, String(i+1), 'לפני ההפקה', p.title, b);
+  d.append(btns,ta); c.append(h,b,d); return c;
 }
 function paint(id){
   const s=state[id].status, pill=document.getElementById('pill-'+id); pill.className='pill '+s; pill.textContent=LABEL[s];
@@ -231,24 +176,21 @@ function paint(id){
   summary();
 }
 function summary(){
-  const lines=['בעבותות אהבה, סרטון הצטרפות לקבוצה – התשובות של רנת:',''];
-  items.forEach(i=>{ const s=state[i.id]; lines.push(i.name+' — '+LABEL[s.status]+(s.note.trim()?(' — '+s.note.trim()):'')); });
-  if(state.general.trim()) lines.push('', 'הערה כללית: '+state.general.trim());
+  const lines=['בעבותות אהבה – התשובות של רנת:',''];
+  DATA.videos.forEach(v=>{ const s=state[v.id]; lines.push('גרסה '+v.num+' ('+v.title+') — '+LABEL[s.status]+(s.note.trim()?(' — '+s.note.trim()):'')); });
   const txt=lines.join('\n');
   document.getElementById('sumtxt').textContent=txt;
   document.getElementById('wa').href='https://wa.me/?text='+encodeURIComponent(txt);
   const done=DATA.videos.filter(v=>state[v.id].status!=='pending').length;
-  document.getElementById('prog').textContent='סימנת '+done+' מתוך '+DATA.videos.length+' גרסאות';
+  document.getElementById('prog').textContent= done ? 'סימנת '+done+' מתוך '+DATA.videos.length+' גרסאות. כשסיימת, שלחי לי.' : 'אחרי שתסמני, שלחי לי את התשובות.';
 }
-const V=document.getElementById('videos'), P=document.getElementById('plan');
-DATA.videos.forEach(v=>V.append(videoCard(v))); DATA.plan.forEach((p,i)=>P.append(planCard(p,i)));
-items.forEach(i=>paint(i.id));
-const g=document.getElementById('general'); g.value=state.general; g.oninput=()=>{ state.general=g.value; store(); summary(); };
+const V=document.getElementById('videos'); DATA.videos.forEach(v=>V.append(card(v)));
+DATA.videos.forEach(v=>paint(v.id));
 document.getElementById('copy').onclick=async()=>{
   const pre=document.getElementById('sumtxt'), btn=document.getElementById('copy');
   try{ await navigator.clipboard.writeText(pre.textContent); btn.textContent='הועתק'; }
-  catch(e){ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='סומן. אפשר להעתיק'; }
-  setTimeout(()=>btn.textContent='העתק סיכום',2500);
+  catch(e){ pre.hidden=false; const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='סומן. אפשר להעתיק'; }
+  setTimeout(()=>btn.textContent='העתק תשובות',2500);
 };
 </script>
 </body></html>
